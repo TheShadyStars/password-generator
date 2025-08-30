@@ -32,7 +32,6 @@ password_length = 0
 
 def main(page: ft.Page):
     page.title = "Password Generator by Shady, v4"
-    #page.window_window_icon = "assets/icon.ico"
 
     page.window.width = 640
     page.window.height = 480
@@ -41,22 +40,16 @@ def main(page: ft.Page):
 
     page.window.center()
 
-    page.vertical_alignment = ft.MainAxisAlignment.CENTER
-    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
-
-    title_text = ft.Text(value="Password Generator", size=36)
-    continue_btn = ft.ElevatedButton("Continue")
-
-    def button_clicked():
-        print('рлп')
-
-    page.add(title_text, continue_btn)
-
     def route_change(route):
         page.views.clear()
         
         # Welcome
         if page.route == "/":
+            global use_letters, use_digits, use_symbols
+            use_letters = False
+            use_digits = False
+            use_symbols = False
+
             page.views.append(
                 ft.View(
                     "/",
@@ -225,6 +218,8 @@ def main(page: ft.Page):
         global password, password_string
 
         password_length = int(password_length_number.value)
+
+        password.clear()
 
         print(password_length)
         print(use_letters, use_digits, use_symbols)
